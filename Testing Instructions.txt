@@ -1,0 +1,10 @@
+Testing Instructions-
+
+-->Install custom activity package manullay, as it  can be found in the (Custom_Activity_Package folder).
+For installing custom activity package go to UiPath package manger change Local source path to Custom_Activity_Package folder.Then install it from there.
+-->Unit test samples are already placed in test Repository for testing purpose.
+-->When RunAllTests.xaml is started it will run all tests that are found in the Tests_Repository folder.
+-->After testing is done a log file will automatically get save into Logs folder.
+
+(To integrate TestingFramework into another project copy whole folder to the target project root directory.)
+					****************************************************************************************************************************

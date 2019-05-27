@@ -1,0 +1,277 @@
+﻿<Activity mc:Ignorable="sap sap2010 sads" x:Class="AppendTestResult"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Diagnostics;assembly=System"
+ xmlns:ui="http://schemas.uipath.com/workflow/activities"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_TestLogFile" Type="InArgument(x:String)" />
+    <x:Property Name="in_File" Type="InArgument(x:String)" />
+    <x:Property Name="in_Result" Type="InArgument(x:Boolean)" />
+    <x:Property Name="io_PassedTestsCounter" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="io_TestCounter" Type="InOutArgument(x:Int32)" />
+    <x:Property Name="in_InvokePrefix" Type="InArgument(x:String)" />
+    <x:Property Name="in_IsTestValid" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_FileNameLength" Type="InArgument(x:Int32)" />
+    <x:Property Name="in_Stopwatch" Type="InArgument(sd:Stopwatch)" />
+    <x:Property Name="in_Message" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>_4_RunAllTests_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Orchestrator.Client</x:String>
+      <x:String>UiPath.Orchestrator.Client.Models</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Mail.Exchange.Activities</x:String>
+      <x:String>UiPath.Mail.IMAP.Activities</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.POP3.Activities</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Web</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>UiPath.JSON.Activities</x:String>
+      <x:String>UiPath.REST.Activities</x:String>
+      <x:String>UiPath.SOAP.Activities</x:String>
+      <x:String>UiPath.XML.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Core.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OrchestratorClient</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Configuration.Install</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="AppendLogs" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="fileName" />
+      <Variable x:TypeArguments="x:String" Name="exceptionDetails" />
+      <Variable x:TypeArguments="x:String" Name="logRow" />
+    </Sequence.Variables>
+    <Assign DisplayName="Set logFormat to Empty" sap2010:WorkflowViewState.IdRef="Assign_24">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[logRow]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Get File Name From File Path" sap2010:WorkflowViewState.IdRef="Assign_21">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[fileName]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_File.Split(new String() {"\"}, StringSplitOptions.None)(in_File.Split(new String() {"\"}, StringSplitOptions.None).Length - 1).Replace(".xaml","").Trim]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="TestCounter++" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[io_TestCounter]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[io_TestCounter+1]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[in_IsTestValid]" sap2010:WorkflowViewState.IdRef="If_2">
+      <If.Then>
+        <If Condition="[in_Result]" DisplayName="Test Passed?" sap2010:WorkflowViewState.IdRef="If_1">
+          <If.Then>
+            <Sequence DisplayName="Passed" sap2010:WorkflowViewState.IdRef="Sequence_5">
+              <Assign DisplayName="PassedTestsCounter++" sap2010:WorkflowViewState.IdRef="Assign_11">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Int32">[io_PassedTestsCounter]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Int32">[io_PassedTestsCounter+1]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LogFormat workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="[in_InvokePrefix+&quot;Framework\LogFormat.xaml&quot;]">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_FileName">[fileName]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Status">PASSED</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_String">[logRow]</OutArgument>
+                  <InArgument x:TypeArguments="x:Int32" x:Key="in_FileNameLength">[in_FileNameLength]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_TestRunTime">[in_Stopwatch.Elapsed.ToString("hh\:mm\:ss\.fff\)")]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:LogMessage DisplayName="Log Passed" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[String.Format(&quot;Test {0,-6}PASSED     {1}&quot;,io_TestCounter.ToString,fileName)]" />
+              <ui:AppendLine DisplayName="Append line Passed" FileName="[in_TestLogFile]" sap2010:WorkflowViewState.IdRef="AppendLine_5" Text="[logRow]" />
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <Sequence DisplayName="Failed" sap2010:WorkflowViewState.IdRef="Sequence_6">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="logFailiure" />
+              </Sequence.Variables>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LogFormat workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="[in_InvokePrefix+&quot;Framework\LogFormat.xaml&quot;]">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_FileName">[fileName]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Status">FAILED</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_String">[logRow]</OutArgument>
+                  <InArgument x:TypeArguments="x:Int32" x:Key="in_FileNameLength">[in_FileNameLength]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_TestRunTime">[in_Stopwatch.Elapsed.ToString("hh\:mm\:ss\.fff\)")]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LogFormatFailiure workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="[in_InvokePrefix+&quot;Framework\LogFormatFailiure.xaml&quot;]">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="in_Message">[in_Message]</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="out_LogFailiure">[logFailiure]</OutArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <Assign DisplayName="Add Failiure Data to Log" sap2010:WorkflowViewState.IdRef="Assign_28">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[logRow]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[logRow + logFailiure]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:LogMessage DisplayName="Log Failed" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Trace" Message="[String.Format(&quot;Test {0,-6}FAILED      {1}     {2}&quot;,io_TestCounter.ToString,fileName,logFailiure)]" />
+              <ui:AppendLine DisplayName="Append line Failed" FileName="[in_TestLogFile]" sap2010:WorkflowViewState.IdRef="AppendLine_4" Text="[logRow]" />
+            </Sequence>
+          </If.Else>
+        </If>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Test Invalid" sap2010:WorkflowViewState.IdRef="Sequence_11">
+          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke LogFormat workflow" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="[in_InvokePrefix+&quot;Framework\LogFormat.xaml&quot;]">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_FileName">[fileName]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Status">ERROR</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_String">[logRow]</OutArgument>
+              <InArgument x:TypeArguments="x:Int32" x:Key="in_FileNameLength">[in_FileNameLength]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_TestRunTime">[in_Stopwatch.Elapsed.ToString("hh\:mm\:ss\.fff\)")]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Assign DisplayName="Add Error Data to Log" sap2010:WorkflowViewState.IdRef="Assign_27">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[logRow]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[logRow + "&lt;!&gt; Test Invalid. Test workflow must contain Assert Unit Test Activity from CustomActivities.VariableComparer namespace. &lt;!&gt;"]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:LogMessage DisplayName="Log Invalid" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[String.Format(&quot;Test {0,-6}ERROR      {1}     &lt;!&gt; Test Invalid. Test workflow must contain Assert Unit Test Activity from CustomActivities.VariableComparer namespace. &lt;!&gt;&quot;,io_TestCounter.ToString,fileName)]" />
+          <ui:AppendLine DisplayName="Append line Failed" FileName="[in_TestLogFile]" sap2010:WorkflowViewState.IdRef="AppendLine_6" Text="[logRow]" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <sads:DebugSymbol.Symbol>d2ZEOlxEb2N1bWVudHMgZm9yIFByb2plY3RzXDAzX1VpcGF0aFxVaVBhdGhfVGVzdGluZ0ZyYW1ld29yayAtIEhhY2thdG9uXEZyYW1ld29ya1xBcHBlbmRUZXN0UmVzdWx0LnhhbWxCZwPaAQ4CAQFtBXQOAgFrdQV8DgIBZ30FhAEOAgFihQEF2AEKAgECcjByPgIBbm8xbzkCAWx6MHrMAQIBancxdzsCAWiCAS+CAUECAWV/MH9AAgFjhQEThQElAgEDhwEJvwEOAgEgwgEJ1gEUAgEFhwEXhwEkAgEhiQENnQEYAgFHoAENvQEYAgEjwwELywEjAgEUzAEL0wEUAgEP1AEL1AHiAgIBC9UBC9UBmAECAQaKAQ+RARgCAV2SAQ+aAScCAVGbAQ+bAdgBAgFNnAEPnAGcAQIBSKQBD6wBJwIBO60BD7IBJwIBNLMBD7oBGAIBLrsBD7sB7QECASm8AQ+8AZwBAgEkyAFPyAFiAgEeyQFNyQGBAQIBHMUBSsUBVAIBGscBSscBUgIBGMMBvAHDAfQBAgEWxgFIxgFNAgEV0QE20QHLAQIBEs4BN84BPwIBENQBedQB3wICAQzVAYsB1QGVAQIBCdUBRNUBVgIBB48BOY8BUgIBYIwBOowBUQIBXpcBU5cBZgIBW5gBUZgBhQECAVmUAU6UAVgCAVeWAU6WAVYCAVWSAcABkgH4AQIBU5UBTJUBUgIBUpsBfJsB1QECAU6cAY8BnAGZAQIBS5wBSJwBWgIBSakBU6kBZgIBRaoBUaoBhQECAUOmAU6mAVgCAUGoAU6oAVYCAT+kAcABpAH4AQIBPacBTKcBUgIBPLABU7ABYAIBOa8BTa8BWQIBN60ByAGtAYgCAgE1uAE6uAFQAgExtQE7tQFDAgEvuwF8uwHqAQIBKrwBjwG8AZkBAgEnvAFIvAFaAgEl</sads:DebugSymbol.Symbol>
+  </Sequence>
+  <sap2010:WorkflowViewState.ViewStateManager>
+    <sap2010:ViewStateManager>
+      <sap2010:ViewStateData Id="Assign_24" sap:VirtualizedContainerService.HintSize="1056,60.8" />
+      <sap2010:ViewStateData Id="Assign_21" sap:VirtualizedContainerService.HintSize="1056,60.8" />
+      <sap2010:ViewStateData Id="Assign_1" sap:VirtualizedContainerService.HintSize="1056,60.8" />
+      <sap2010:ViewStateData Id="Assign_11" sap:VirtualizedContainerService.HintSize="313.6,60.8" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="LogMessage_2" sap:VirtualizedContainerService.HintSize="313.6,92.8" />
+      <sap2010:ViewStateData Id="AppendLine_5" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="Sequence_5" sap:VirtualizedContainerService.HintSize="336,574.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_5" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="Assign_28" sap:VirtualizedContainerService.HintSize="313.6,60.8" />
+      <sap2010:ViewStateData Id="LogMessage_3" sap:VirtualizedContainerService.HintSize="313.6,92.8" />
+      <sap2010:ViewStateData Id="AppendLine_4" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="Sequence_6" sap:VirtualizedContainerService.HintSize="336,702.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_1" sap:VirtualizedContainerService.HintSize="696,852.8">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="Assign_27" sap:VirtualizedContainerService.HintSize="313.6,60.8" />
+      <sap2010:ViewStateData Id="LogMessage_4" sap:VirtualizedContainerService.HintSize="313.6,92.8" />
+      <sap2010:ViewStateData Id="AppendLine_6" sap:VirtualizedContainerService.HintSize="313.6,88" />
+      <sap2010:ViewStateData Id="Sequence_11" sap:VirtualizedContainerService.HintSize="336,574.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="1056,1003.2" />
+      <sap2010:ViewStateData Id="Sequence_10" sap:VirtualizedContainerService.HintSize="1078.4,1430.4">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="_4_RunAllTests_1" sap:VirtualizedContainerService.HintSize="1118.4,1830.4" />
+    </sap2010:ViewStateManager>
+  </sap2010:WorkflowViewState.ViewStateManager>
+</Activity>
