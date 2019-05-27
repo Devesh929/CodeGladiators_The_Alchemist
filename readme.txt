@@ -47,21 +47,8 @@ Output of this stage should be actual value that code produces assigned to the a
 Assert Stage
 Purpose of the assert stage is to evaluate test outputs (usually this is done by comparing actual value gotten by running the code with the expected value that was defined in the arrange stage, but is not the only type of test that can be done).
 
-For Framework to consider a Unit Test as valid, it must implement Assert Unit Test activity. This activity is meant to be used along with, one of the many, Assert methods from CustomActivities.VariableComparer namespace.
 
 Assert methods make writing of Unit Tests much easier and exceptions thrown by these methods serve a big role in Framework logging.
 Quick guide:
 
 Assert Unit Test activity is used as a container for writing Assert methods (imported from CustomActivities.VariableComparer namespace) which are used to evaluate unit test outputs.
-Assert.AreEqual(expected,actual)
-Assert.AreNotEqual(expected,actual)
-Assert.AreSame(expected,actual)
-Assert.AreNotSame(expected,actual)
-Assert.Contains(expected,actual)
-Assert.NotContains(expected,actual)
-Assert.IsNull(actual)
-Assert.IsNotNull(actual)
-Assert methods throw custom exceptions that are used by the Framework to log test results and give important information in case of a test failiure.
-AssertException is main exception thrown by Assert methods.
-AssertNullException is exception thrown when Assert.IsNull or Assert.IsNotNull method returns false.
-CustomAssertException is generic exception that is thrown when random boolean expression that returns false is passed to Assert Unit Test activity
