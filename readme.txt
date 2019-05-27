@@ -1,17 +1,24 @@
-This File Constains basic idea of project for testing instructions refer-(testing instructions.txt)
+This File Constains basic idea of project, for testing instructions refer-(testing instructions.txt)
 For Team Details and Project Link Details refer "UiPath_-_Submission.docx"
+For proper architecture refer ppt.
 
-***UiPath_TestingFramework***
-Framework used for running of UnitTests in UiPath.
+Our idea is to develop a project for Unit Testing  that works as a plug and play component. We are developing a framework which will run all the unit tests in a folder and generates a log report stating results of all tests (pass/fail) also stating the errors if a particular unit test case is failed.
 
-Whole idea behind the Framework was to make UiPath Unit Testing platform that works as a plug and play component that doesn't need to be configured before use.
+-->Unit Tests are the cases designed to test any algorithm, logic, workflow.
+ 
+Our project includes-
+
+ Framework : used for automated running of unit tests and logging.
+ Custom activity package: that plays essential part in running of Framework and Unit Tests both.
+ Unit Test Template :used to easily make unit tests.
 
 Resulting product is a Framework that:
 
 -->Can be integrated into any UiPath project or framework (can be placed inside any folder or sub-folder and it will still work out of the box).
 -->Can run any .xaml file found in Test_Repository folder and also make a distinction if .xaml file is a Unit Test or not (user is notified via log).
 -->Logs test runs and gives extensive information about failed tests (both inside UiPath console and in textual log files).
-*******Unit tests*******
+
+*****Unit tests*******
 Framework has no use if there are no tests to be run. As such, biggest effort required from the developers themselves is in writing of Unit Tests. Luckily, by using unit test template, custom activity and Assert methods, this is much less of a chore.
 
 Basic idea of Unit Testing is to arrange a set of data that will be used to test the code.
